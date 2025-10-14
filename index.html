@@ -2,268 +2,125 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Ghazel Adam — Portfolio</title>
-<meta name="description" content="Portfolio professionnel de Ghazel Adam : projets, compétences, parcours et contacts." />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="" rel="stylesheet">
-<link rel="stylesheet" href="style.css" />
-<link rel="icon" href="data:image/svg+xml,<text y=%22.9em%22 font-size=%2290%22>🟩</text></svg>">
-<script defer src="script.js"></script>
+<link rel="stylesheet" href="style.css"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-<!-- Header / Navigation -->
+<!-- Header / Nav -->
 <header class="site-header">
-<div class="container nav-wrap">
-<a href="#accueil" class="logo" aria-label="Aller à l’accueil">
-<span class="logo-mark">GA</span><span class="logo-text">Ghazel Adam</span>
-</a>
-<nav class="main-nav" aria-label="Navigation principale">
-<button class="nav-toggle" aria-expanded="false" aria-controls="navList" aria-label="Ouvrir le menu">
-<span class="line"></span><span class="line"></span><span class="line"></span>
-</button>
-<ul id="navList">
-<li><a href="#accueil">Accueil</a></li>
-<li><a href="#competences">Compétences</a></li>
-<li><a href="#projets">Projets</a></li>
-<li><a href="#parcours">Parcours</a></li>
-<li><a href="#contact">Contact</a></li>
-</ul>
+<div class="container nav">
+<a href="#" class="brand">Ghazel<span>Adam</span></a>
+<nav class="menu">
+<a href="#hero">Accueil</a>
+<a href="#skills">Compétences</a>
+<a href="#projects">Projets</a>
+<a href="#timeline">Parcours</a>
+<a href="#contact">Contact</a>
 </nav>
+<button class="menu-toggle" aria-label="Ouvrir le menu">
+<span></span><span></span><span></span>
+</button>
 </div>
 </header>
 
-<!-- Hero / Accueil -->
-<section id="accueil" class="section-hero">
+<!-- Hero -->
+<section id="hero" class="hero">
 <div class="container hero-grid">
-<div class="hero-left" data-animate="fade-up">
-<h1 class="hero-title"><span class="accent">Bonjour, je suis</span><br> <span class="name">Ghazel Adam</span></h1>
-<p class="hero-subtitle">
-Étudiant passionné par le <strong>développement web</strong> et les <strong>réseaux</strong>, j’aime créer des interfaces épurées,
-rapides et modernes, avec une expérience utilisateur soignée.
+<div class="hero-text">
+<h1>Construire, sécuriser et optimiser des systèmes & réseaux</h1>
+<p>
+Je m’appelle <strong>Ghazel Adam</strong>. Étudiant en BUT Réseaux & Télécom,
+je conçois des <strong>architectures réseau</strong>, des <strong>apps web</strong>
+modernes et des <strong>outils d’automatisation</strong> pour gagner en fiabilité et en performance.
 </p>
-<div class="hero-cta">
-<a href="#projets" class="btn primary">Voir mes projets</a>
-<a href="#contact" class="btn ghost">Me contacter</a>
+<div class="cta">
+<a class="btn" href="#projects">Voir mes projets</a>
+<a class="btn btn-ghost" href="#contact">Me contacter</a>
 </div>
-<ul class="hero-highlights">
-<li><span class="dot"></span>Design soigné & animations fluides</li>
-<li><span class="dot"></span>Performance & accessibilité</li>
-<li><span class="dot"></span>Responsive (PC, tablette, mobile)</li>
-</ul>
 </div>
 
-<div class="hero-right" data-animate="fade-up" data-animate-delay="100">
-<!-- Avatar / photo de profil (placeholder SVG) -->
+<!-- ✅ Photo de profil personnalisée -->
+<div class="hero-media">
 <div class="avatar">
-<svg viewBox="0 0 200 200" class="blob" aria-hidden="true">
-<defs>
-<linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
-<stop offset="0%" stop-color="#35ffc5"/>
-<stop offset="100%" stop-color="#00b3ff"/>
-</linearGradient>
-</defs>
-<path fill="url(#grad)" d="M38.1,-58.3C49.7,-50.3,59.7,-41.1,65.2,-29.5C70.6,-17.9,71.5,-3.9,68.7,9.2C66,22.4,59.6,34.8,50.3,44.7C41,54.7,28.9,62.2,15.4,65.3C1.8,68.3,-12.9,66.9,-27.4,62.1C-41.9,57.3,-56.2,49,-63,36.6C-69.8,24.2,-69.1,7.8,-66.3,-7.7C-63.6,-23.2,-58.8,-37.8,-48.7,-46.9C-38.6,-56,-23.3,-59.6,-8.5,-56.9C6.3,-54.2,12.6,-45.3,38.1,-58.3Z" transform="translate(100 100)" />
-</svg>
-<href="/home/adam/photo_portfolio.png" alt="Photo de Ghazel Adam" loading="lazy">
+<div class="avatar-ring"></div>
+<img src="./profil.png" alt="Photo de profil de Ghazel Adam"/>
 </div>
 </div>
+
 </div>
 </section>
 
-<!-- Compétences -->
-<section id="competences" class="section skills">
+<!-- Skills -->
+<section id="skills" class="section">
 <div class="container">
-<div class="section-head" data-animate="fade-up">
-<h2 class="title">Compétences</h2>
-<p class="subtitle">Un mix de <strong>technique</strong> et de <strong>créativité</strong> au service de projets concrets.</p>
-</div>
-
+<h2 class="section-title">Compétences</h2>
 <div class="skills-grid">
-<!-- Skill Card -->
-<article class="skill-card" data-animate="fade-up">
-<div class="skill-icon" aria-hidden="true">
-<!-- Code icon -->
-<svg viewBox="0 0 24 24"><path d="M9.4 16.6 4.8 12l4.6-4.6M14.6 7.4 19.2 12l-4.6 4.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+<div class="skill">
+<h3>Réseaux</h3>
+<p>OSPF, VLAN, NAT, ACL, HSRP, ASA, IPv4/IPv6, BGP (bases), QoS</p>
 </div>
-<h3>Front-end</h3>
-<p>HTML5, CSS3, JavaScript (ES6+), UI responsive, accessibilité, SEO.</p>
-<div class="progress">
-<span style="--val: 90%"></span>
+<div class="skill">
+<h3>Sécurité</h3>
+<p>Segmentation DMZ, listes de contrôle, durcissement, supervision</p>
 </div>
-</article>
-
-<article class="skill-card" data-animate="fade-up" data-animate-delay="50">
-<div class="skill-icon" aria-hidden="true">
-<!-- Brush icon -->
-<svg viewBox="0 0 24 24"><path d="M3 17s1 1 3 1 3-1 4-2l8-8a3 3 0 0 0-4-4l-8 8c-1 1-2 2-2 4z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+<div class="skill">
+<h3>Back & APIs</h3>
+<p>Node.js / Express, REST, Auth JWT, Mongo/SQLite</p>
 </div>
-<h3>Design UI</h3>
-<p>Maquettes, systèmes de couleurs, micro-interactions, typographie élégante.</p>
-<div class="progress">
-<span style="--val: 85%"></span>
+<div class="skill">
+<h3>Front</h3>
+<p>HTML, CSS, JS, animations, design responsive</p>
 </div>
-</article>
-
-<article class="skill-card" data-animate="fade-up" data-animate-delay="100">
-<div class="skill-icon" aria-hidden="true">
-<!-- Server icon -->
-<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="3" y="14" width="18" height="6" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="17" cy="7" r="1" /><circle cx="17" cy="17" r="1" /></svg>
+<div class="skill">
+<h3>Cloud & Outils</h3>
+<p>Docker (bases), Git/GitHub, Firebase, CI/CD (basique)</p>
 </div>
-<h3>Réseaux & Outils</h3>
-<p>Notions d’OS, Git, hébergement statique, optimisation performance.</p>
-<div class="progress">
-<span style="--val: 75%"></span>
+<div class="skill">
+<h3>IoT & Télécom</h3>
+<p>LoRa/LoRaWAN (bases), MQTT, topologies Packet Tracer</p>
 </div>
-</article>
-
-<article class="skill-card" data-animate="fade-up" data-animate-delay="150">
-<div class="skill-icon" aria-hidden="true">
-<!-- Rocket icon -->
-<svg viewBox="0 0 24 24"><path d="M5 19c2-1 4-2 5-3 4-4 7-11 7-11s-7 3-11 7c-1 1-2 3-3 5l2 2z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
-</div>
-<h3>Performance</h3>
-<p>Audit Lighthouse, lazy-loading, images modernes, animations légères.</p>
-<div class="progress">
-<span style="--val: 80%"></span>
-</div>
-</article>
 </div>
 </div>
 </section>
 
-<!-- Projets -->
-<section id="projets" class="section projects">
+<!-- Projects -->
+<section id="projects" class="section">
 <div class="container">
-<div class="section-head" data-animate="fade-up">
-<h2 class="title">Projets</h2>
-<p class="subtitle">Sélection de réalisations avec effets hover et détails.</p>
+<div class="section-head">
+<h2 class="section-title">Projets</h2>
+<a class="link-more" href="#" aria-disabled="true">Voir plus (bientôt)</a>
 </div>
-
-<div class="projects-grid">
-<!-- 6 projets, 3 visibles par défaut, 3 masqués (révélés avec "Voir plus") -->
-<article class="project-card" data-animate="fade-up">
-<div class="project-media">
-<img src="https://images.unsplash.com/photo-1520975916090-3105956dac38?q=80&w=1200&auto=format&fit=crop" alt="Aperçu Projet 1" loading="lazy">
-<div class="overlay">
-<h3>Dashboard Analytics</h3>
-<p>UI responsive, cartes, graphes, micro-interactions.</p>
-<a class="btn small" href="#" target="_blank" rel="noopener">Voir le projet</a>
-</div>
-</div>
-<ul class="tags">
-<li>#UI</li><li>#JS</li><li>#Charts</li>
-</ul>
-</article>
-
-<article class="project-card" data-animate="fade-up" data-animate-delay="50">
-<div class="project-media">
-<img src="https://images.unsplash.com/photo-1516116216624-53e697fedbea?q=80&w=1200&auto=format&fit=crop" alt="Aperçu Projet 2" loading="lazy">
-<div class="overlay">
-<h3>Landing Produit</h3>
-<p>Design épuré, conversion, animations d’apparition.</p>
-<a class="btn small" href="#" target="_blank" rel="noopener">Voir le projet</a>
-</div>
-</div>
-<ul class="tags">
-<li>#Landing</li><li>#Animations</li><li>#SEO</li>
-</ul>
-</article>
-
-<article class="project-card" data-animate="fade-up" data-animate-delay="100">
-<div class="project-media">
-<img src="https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=1200&auto=format&fit=crop" alt="Aperçu Projet 3" loading="lazy">
-<div class="overlay">
-<h3>Portfolio Photo</h3>
-<p>Galerie mosaïque, filtre, hover smooth.</p>
-<a class="btn small" href="#" target="_blank" rel="noopener">Voir le projet</a>
-</div>
-</div>
-<ul class="tags">
-<li>#Galerie</li><li>#Grid</li><li>#Hover</li>
-</ul>
-</article>
-
-<!-- Masqués au départ -->
-<article class="project-card hidden" data-animate="fade-up">
-<div class="project-media">
-<img src="https://images.unsplash.com/photo-1551281044-8a8a6a04a2c5?q=80&w=1200&auto=format&fit=crop" alt="Aperçu Projet 4" loading="lazy">
-<div class="overlay">
-<h3>App To-Do</h3>
-<p>Gestion tâches, drag-drop, persistance locale.</p>
-<a class="btn small" href="#" target="_blank" rel="noopener">Voir le projet</a>
-</div>
-</div>
-<ul class="tags">
-<li>#App</li><li>#UX</li><li>#LocalStorage</li>
-</ul>
-</article>
-
-<article class="project-card hidden" data-animate="fade-up" data-animate-delay="50">
-<div class="project-media">
-<img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop" alt="Aperçu Projet 5" loading="lazy">
-<div class="overlay">
-<h3>Blog Tech</h3>
-<p>Markdown, thème sombre, typographie élégante.</p>
-<a class="btn small" href="#" target="_blank" rel="noopener">Voir le projet</a>
-</div>
-</div>
-<ul class="tags">
-<li>#Blog</li><li>#Typo</li><li>#DarkMode</li>
-</ul>
-</article>
-
-<article class="project-card hidden" data-animate="fade-up" data-animate-delay="100">
-<div class="project-media">
-<img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop" alt="Aperçu Projet 6" loading="lazy">
-<div class="overlay">
-<h3>Espace Membre</h3>
-<p>Formulaires, validation, feedback utilisateur.</p>
-<a class="btn small" href="#" target="_blank" rel="noopener">Voir le projet</a>
-</div>
-</div>
-<ul class="tags">
-<li>#Form</li><li>#Accessibilité</li><li>#Feedback</li>
-</ul>
-</article>
-</div>
-
-<div class="center" data-animate="fade-up" data-animate-delay="100">
-<button id="voirPlus" class="btn primary">Voir plus</button>
-</div>
+<div id="projectsGrid" class="projects-grid"></div>
 </div>
 </section>
 
-<!-- Parcours / Formation -->
-<section id="parcours" class="section timeline">
+<!-- Timeline -->
+<section id="timeline" class="section">
 <div class="container">
-<div class="section-head" data-animate="fade-up">
-<h2 class="title">Parcours & Formation</h2>
-<p class="subtitle">Mon évolution à travers des expériences concrètes.</p>
-</div>
-
-<div class="timeline-wrap">
-<div class="tl-item" data-animate="fade-up">
-<div class="tl-dot"></div>
-<div class="tl-card glass">
-<h3>2025 — Présent</h3>
-<p><strong>Développement Web & Réseaux</strong> • Projets personnels et académiques. Mise en place de sites et optimisation de performances.</p>
+<h2 class="section-title">Parcours</h2>
+<div class="timeline">
+<div class="t-item">
+<div class="t-dot"></div>
+<div class="t-content">
+<h3>BUT Réseaux & Télécom — IUT Nice Côte d’Azur</h3>
+<p>2024 — 2026 • Spécialisation réseaux, sécurité, IoT & systèmes</p>
 </div>
 </div>
-
-<div class="tl-item" data-animate="fade-up" data-animate-delay="50">
-<div class="tl-dot"></div>
-<div class="tl-card glass">
-<h3>2024 — 2025</h3>
-<p><strong>Projets d’études</strong> • UI/UX, maquettes, intégration complète. Découverte des bonnes pratiques d’accessibilité.</p>
+<div class="t-item">
+<div class="t-dot"></div>
+<div class="t-content">
+<h3>Projets académiques & perso (R&T)</h3>
+<p>SAE 21/22/23/24, topologies multi-VLAN, ASA, HSRP, automation scripts.</p>
 </div>
 </div>
-
-<div class="tl-item" data-animate="fade-up" data-animate-delay="100">
-<div class="tl-dot"></div>
-<div class="tl-card glass">
-<h3>Avant 2024</h3>
-<p><strong>Initiation</strong> • Bases en HTML/CSS/JS, premiers prototypes, curiosité pour l’animation et les micro-interactions.</p>
+<div class="t-item">
+<div class="t-dot"></div>
+<div class="t-content">
+<h3>Associatif & arbitrage sportif</h3>
+<p>1ᵉ saison d’arbitrage pour la MMA League . Gestion d’événements, discipline, leadership.</p>
 </div>
 </div>
 </div>
@@ -271,57 +128,41 @@ rapides et modernes, avec une expérience utilisateur soignée.
 </section>
 
 <!-- Contact -->
-<section id="contact" class="section contact">
+<section id="contact" class="section">
 <div class="container">
-<div class="section-head" data-animate="fade-up">
-<h2 class="title">Contact</h2>
-<p class="subtitle">Un projet, une idée, une collaboration ? Écrivez-moi.</p>
-</div>
-
+<h2 class="section-title">Contact</h2>
 <div class="contact-grid">
-<form id="contactForm" class="contact-form glass" novalidate data-animate="fade-up">
-<div class="form-field">
-<label for="name">Nom</label>
-<input type="text" id="name" name="name" placeholder="Votre nom" required />
-<span class="error" aria-live="polite"></span>
-</div>
-<div class="form-field">
-<label for="email">E-mail</label>
-<input type="email" id="email" name="email" placeholder="votre@email.com" required />
-<span class="error" aria-live="polite"></span>
-</div>
-<div class="form-field">
-<label for="message">Message</label>
-<textarea id="message" name="message" rows="5" placeholder="Votre message..." required></textarea>
-<span class="error" aria-live="polite"></span>
-</div>
-<button type="submit" class="btn primary full">Envoyer</button>
-<p class="form-feedback" role="status" aria-live="polite"></p>
+<form class="contact-form" id="contactForm">
+<label>Nom
+<input type="text" name="name" placeholder="Votre nom" required>
+</label>
+<label>Email
+<input type="email" name="email" placeholder="nom@exemple.com" required>
+</label>
+<label>Message
+<textarea name="message" rows="5" placeholder="Votre message…" required></textarea>
+</label>
+<button class="btn" type="submit">Envoyer</button>
+<p class="form-status" id="formStatus" aria-live="polite"></p>
 </form>
-
-<aside class="contact-aside" data-animate="fade-up" data-animate-delay="50">
+<div class="contact-aside">
 <h3>Réseaux</h3>
-<p>Retrouvez-moi et suivons-nous :</p>
 <ul class="socials">
-<li><a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4 3a2 2 0 1 1 0 4 2 2 0 0 1 0-4ZM4 8h4v12H4zM10 8h4v2h.1a4.5 4.5 0 0 1 3.9-2c4.1 0 4.8 2.7 4.8 6.2V20h-4v-5.2c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.7V20h-4z" fill="currentColor"/></svg></a></li>
-<li><a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 .5A12 12 0 0 0 0 12.6c0 5.3 3.4 9.8 8.2 11.4.6.1.8-.3.8-.6v-2c-3.3.7-4-1.4-4-1.4-.5-1.2-1.2-1.6-1.2-1.6-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 .1.8 2.1 3.5 1.5v-1.9c-2.7-.3-5.6-1.4-5.6-6.3 0-1.4.5-2.6 1.2-3.6-.1-.3-.5-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0C16.4 3.9 17.4 4.2 17.4 4.2c.6 1.6.2 2.9.1 3.2.8 1 1.2 2.2 1.2 3.6 0 4.9-2.9 6-5.6 6.3v2.1c0 .3.2.7.8.6A12 12 0 0 0 24 12.6 12 12 0 0 0 12 .5Z" fill="currentColor"/></svg></a></li>
-<li><a href="#" aria-label="Twitter / X"><svg viewBox="0 0 24 24"><path d="M18.2 2H21l-6.5 7.4L22 22h-6.8l-4.4-5.7L5.7 22H3l7.1-8.1L2.3 2h6.9l4 5.3L18.2 2Zm-1.2 18h1.9L8.1 4H6.1z" fill="currentColor"/></svg></a></li>
-<li><a href="mailto:contact@example.com" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Zm0 2 8 5 8-5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a></li>
+<li><a href="https://fr.linkedin.com/in/adam-ghazel-00749b338" aria-disabled="true">LinkedIn</a></li>
+<li><a href="#" aria-disabled="true">GitHub</a></li>
 </ul>
-<div class="contact-note">
-Disponible pour projets freelance, stages et collaborations.
+<p class="note">Les liens seront actifs après mise en ligne.</p>
 </div>
-</aside>
 </div>
 </div>
 </section>
 
-<!-- Footer -->
-<footer class="site-footer">
+<footer class="footer">
 <div class="container footer-inner">
 <p>© 2025 <strong>Ghazel Adam</strong> – Tous droits réservés</p>
-<a href="#accueil" class="back-to-top" aria-label="Remonter en haut">↑</a>
 </div>
 </footer>
+
+<script src="script.js"></script>
 </body>
 </html>
