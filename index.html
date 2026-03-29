@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adam Ghazel — Portfolio BUT R&T</title>
+    <meta name="description" content="Portfolio de Adam Ghazel, étudiant en 2ème année de BUT Réseaux & Télécommunications à l'IUT Nice Côte d'Azur.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --bg:#0a0e17;--bg2:#111827;--card:#1a2236;--card-h:#1f2a42;
+            --accent:#00e5ff;--accent-d:#00b8d4;--accent-g:rgba(0,229,255,.15);
+            --purple:#7c4dff;--green:#00e676;
+            --t1:#e8eaf6;--t2:#9aa5b4;--t3:#5c6b7f;
+            --border:#1e2d45;--border-g:rgba(0,229,255,.3);
+            --ff:'Outfit',sans-serif;--fm:'JetBrains Mono',monospace;
+            --r:12px;--rs:8px;--tr:.3s cubic-bezier(.4,0,.2,1);
+        }
+        html{scroll-behavior:smooth;scroll-padding-top:80px}
+        body{font-family:var(--ff);background:var(--bg);color:var(--t1);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+        ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--accent-d);border-radius:3px}
+        a{color:inherit;text-decoration:none}
+
+        /* NAV */
+        .nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 2rem;height:70px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,14,23,.85);backdrop-filter:blur(20px);border-bottom:1px solid transparent;transition:var(--tr)}
+        .nav.scrolled{border-bottom-color:var(--border);box-shadow:0 4px 24px rgba(0,0,0,.4)}
+        .nav-logo{font-family:var(--fm);font-weight:700;font-size:1.1rem;color:var(--accent)}
+        .nav-logo span{color:var(--t3)}
+        .nav-links{display:flex;gap:.4rem;list-style:none}
+        .nav-links a{color:var(--t2);font-size:.85rem;font-weight:500;padding:.5rem .9rem;border-radius:var(--rs);transition:var(--tr)}
+        .nav-links a:hover,.nav-links a.active{color:var(--accent);background:var(--accent-g)}
+        .nav-tog{display:none;background:0;border:0;cursor:pointer;padding:.5rem}
+        .nav-tog span{display:block;width:24px;height:2px;background:var(--t1);margin:5px 0;transition:var(--tr);border-radius:2px}
+
+        /* HERO */
+        .hero{min-height:100vh;display:flex;align-items:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden}
+        .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 70% 30%,rgba(0,229,255,.06) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 20% 80%,rgba(124,77,255,.04) 0%,transparent 50%)}
+        .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,229,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,.03) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,#000 20%,transparent 70%)}
+        .hero-inner{max-width:1200px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 360px;gap:4rem;align-items:center;position:relative;z-index:1}
+        .hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent-g);border:1px solid rgba(0,229,255,.2);padding:.4rem 1rem;border-radius:50px;font-size:.82rem;font-family:var(--fm);color:var(--accent);margin-bottom:1.5rem;width:fit-content}
+        .hero-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+        @keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,229,255,.4)}50%{opacity:.7;box-shadow:0 0 0 6px rgba(0,229,255,0)}}
+        .hero-name{font-size:clamp(3rem,7vw,5rem);font-weight:900;line-height:1.05;letter-spacing:-2px;margin-bottom:.5rem}
+        .hero-name .gradient{background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .hero-role{font-size:1.15rem;color:var(--t2);margin-bottom:1.5rem;font-weight:400}
+        .hero-desc{font-size:1rem;color:var(--t2);margin-bottom:2rem;max-width:540px;line-height:1.8}
+        .hero-desc strong{color:var(--t1)}
+        .hero-cta{display:flex;gap:1rem;flex-wrap:wrap}
+        .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.8rem;border-radius:var(--rs);font-family:var(--ff);font-weight:600;font-size:.92rem;text-decoration:none;transition:var(--tr);cursor:pointer;border:none}
+        .btn-p{background:linear-gradient(135deg,var(--accent),var(--accent-d));color:var(--bg)}
+        .btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,229,255,.3)}
+        .btn-o{background:0;color:var(--t1);border:1px solid var(--border)}
+        .btn-o:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-g)}
+        .hero-photo{position:relative;display:flex;justify-content:center}
+        .hero-frame{width:300px;height:380px;border-radius:20px;overflow:hidden;border:2px solid var(--border);position:relative;background:var(--card)}
+        .hero-frame::before{content:'';position:absolute;inset:-2px;border-radius:22px;background:linear-gradient(135deg,var(--accent),var(--purple));z-index:-1;opacity:.5}
+        .hero-frame img{width:100%;height:100%;object-fit:cover;object-position:center top}
+        .hero-stats{display:flex;gap:2rem;margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--border)}
+        .hero-stat .num{font-size:1.8rem;font-weight:800;color:var(--accent);font-family:var(--fm)}
+        .hero-stat .lbl{font-size:.75rem;color:var(--t3);text-transform:uppercase;letter-spacing:1px}
+
+        /* SECTIONS */
+        section{padding:5rem 2rem}.container{max-width:1200px;margin:0 auto}
+        .sec-label{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--fm);font-size:.82rem;color:var(--accent);text-transform:uppercase;letter-spacing:2px;margin-bottom:.75rem}
+        .sec-label::before{content:'';width:24px;height:2px;background:var(--accent);border-radius:1px}
+        .sec-title{font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:700;letter-spacing:-.5px;margin-bottom:.75rem}
+        .sec-sub{color:var(--t2);font-size:1rem;max-width:600px;margin-bottom:3rem}
+
+        /* ABOUT */
+        .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+        .about-text p{color:var(--t2);margin-bottom:1rem;font-size:.95rem}
+        .about-text strong{color:var(--t1);font-weight:600}
+        .about-cards{display:flex;flex-direction:column;gap:1rem}
+        .about-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.3rem;transition:var(--tr)}
+        .about-card:hover{border-color:var(--accent);transform:translateX(4px)}
+        .about-card h4{font-size:.92rem;font-weight:600;margin-bottom:.25rem;display:flex;align-items:center;gap:.5rem}
+        .about-card p{font-size:.83rem;color:var(--t2);line-height:1.5}
+
+        /* SKILLS */
+        .skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));gap:1.5rem}
+        .sk-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.8rem;transition:var(--tr);cursor:pointer;position:relative;overflow:hidden}
+        .sk-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--purple));transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
+        .sk-card:hover{border-color:var(--border-g);transform:translateY(-4px);box-shadow:0 0 30px rgba(0,229,255,.08)}
+        .sk-card:hover::before{transform:scaleX(1)}
+        .sk-head{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem}
+        .sk-icon{width:44px;height:44px;border-radius:var(--rs);background:var(--accent-g);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+        .sk-card h3{font-size:1.05rem;font-weight:700}
+        .sk-items{display:flex;flex-direction:column;gap:.8rem}
+        .sk-item-h{display:flex;justify-content:space-between;align-items:center}
+        .sk-item-n{font-size:.82rem;font-weight:500;color:var(--t2)}
+        .sk-item-l{font-family:var(--fm);font-size:.72rem;color:var(--accent)}
+        .sk-bar{height:4px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden}
+        .sk-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--purple));width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+        .sk-details{max-height:0;overflow:hidden;transition:max-height .5s ease;margin-top:0}
+        .sk-card.expanded .sk-details{max-height:500px;margin-top:1.2rem}
+        .sk-det-list{list-style:none;display:flex;flex-wrap:wrap;gap:.4rem}
+        .sk-det-list li{font-size:.72rem;background:rgba(0,229,255,.06);border:1px solid rgba(0,229,255,.1);padding:.2rem .55rem;border-radius:50px;color:var(--accent);font-family:var(--fm)}
+        .sk-tog{display:flex;align-items:center;gap:.3rem;font-size:.78rem;color:var(--t3);margin-top:1rem;font-family:var(--fm)}
+        .sk-tog-arr{transition:transform .3s;display:inline-block}
+        .sk-card.expanded .sk-tog-arr{transform:rotate(180deg)}
+
+        /* Soft Skills row in skills section */
+        .soft-skills-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.8rem;margin-top:2rem}
+        .soft-tag{background:var(--card);border:1px solid var(--border);border-radius:var(--rs);padding:.8rem 1rem;text-align:center;transition:var(--tr);font-size:.85rem;font-weight:500}
+        .soft-tag:hover{border-color:var(--accent);transform:translateY(-2px)}
+        .soft-tag .emoji{font-size:1.3rem;display:block;margin-bottom:.3rem}
+        .langs-row{display:flex;gap:1rem;margin-top:1.5rem;flex-wrap:wrap}
+        .lang-tag{background:var(--card);border:1px solid var(--border);border-radius:50px;padding:.5rem 1.2rem;font-size:.85rem;display:flex;align-items:center;gap:.5rem}
+        .lang-tag .lang-level{color:var(--accent);font-family:var(--fm);font-size:.75rem}
+
+        /* PROJECTS */
+        .proj-filters{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2.5rem}
+        .filt-btn{padding:.5rem 1.2rem;border-radius:50px;border:1px solid var(--border);background:0;color:var(--t2);font-family:var(--ff);font-size:.85rem;font-weight:500;cursor:pointer;transition:var(--tr)}
+        .filt-btn:hover{border-color:var(--accent);color:var(--accent)}
+        .filt-btn.active{background:var(--accent);color:var(--bg);border-color:var(--accent);font-weight:600}
+        .proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:1.5rem}
+        .proj-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:var(--tr);cursor:pointer}
+        .proj-card.hidden{display:none}
+        .proj-card:hover{border-color:var(--border-g);transform:translateY(-4px);box-shadow:0 0 30px rgba(0,229,255,.08)}
+        .proj-vis{height:160px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+        .proj-vis .p-icon{font-size:2.8rem;position:relative;z-index:1}
+        .proj-vis .p-bg{position:absolute;inset:0}
+        .proj-body{padding:1.5rem}
+        .proj-cat{font-family:var(--fm);font-size:.72rem;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:.4rem}
+        .proj-card h3{font-size:1rem;font-weight:700;margin-bottom:.4rem}
+        .proj-desc{font-size:.83rem;color:var(--t2);line-height:1.6;margin-bottom:.6rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+        .proj-comment{font-size:.8rem;color:var(--accent-d);font-style:italic;margin-bottom:.8rem;padding-left:.8rem;border-left:2px solid var(--accent);line-height:1.5}
+        .proj-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:1rem}
+        .proj-tag{font-size:.68rem;padding:.2rem .45rem;border-radius:4px;background:rgba(0,229,255,.06);color:var(--accent-d);font-family:var(--fm);border:1px solid rgba(0,229,255,.08)}
+        .proj-foot{display:flex;align-items:center;justify-content:space-between;padding-top:.8rem;border-top:1px solid var(--border)}
+        .proj-ctx{font-size:.75rem;color:var(--t3)}
+        .proj-btn{font-size:.8rem;color:var(--accent);background:0;border:0;cursor:pointer;font-family:var(--ff);font-weight:600;display:flex;align-items:center;gap:.3rem;transition:var(--tr)}
+        .proj-btn:hover{gap:.6rem}
+
+        /* MODAL */
+        .modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);z-index:2000;display:none;align-items:center;justify-content:center;padding:2rem}
+        .modal-ov.active{display:flex}
+        .modal{background:var(--bg2);border:1px solid var(--border);border-radius:16px;max-width:720px;width:100%;max-height:85vh;overflow-y:auto;position:relative;animation:modal-in .3s ease}
+        @keyframes modal-in{from{opacity:0;transform:scale(.95) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+        .modal-x{position:absolute;top:1rem;right:1rem;background:var(--card);border:1px solid var(--border);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--t2);font-size:1.2rem;transition:var(--tr);z-index:1}
+        .modal-x:hover{border-color:var(--accent);color:var(--accent)}
+        .modal-head{padding:2rem 2rem 1rem;border-bottom:1px solid var(--border)}
+        .modal-cat{font-family:var(--fm);font-size:.75rem;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:.5rem}
+        .modal h2{font-size:1.4rem;font-weight:700;margin-bottom:.4rem}
+        .modal-ctx{font-size:.85rem;color:var(--t3)}
+        .modal-bd{padding:2rem}
+        .modal-bd h4{font-size:.88rem;font-weight:700;color:var(--accent);margin:1.5rem 0 .6rem;display:flex;align-items:center;gap:.5rem}
+        .modal-bd h4:first-child{margin-top:0}
+        .modal-bd p{font-size:.88rem;color:var(--t2);line-height:1.7;margin-bottom:.6rem}
+        .modal-bd ul{list-style:none;padding:0;margin-bottom:.8rem}
+        .modal-bd ul li{font-size:.85rem;color:var(--t2);padding:.25rem 0 .25rem 1.2rem;position:relative}
+        .modal-bd ul li::before{content:'›';position:absolute;left:0;color:var(--accent);font-weight:700}
+        .m-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin:.8rem 0}
+        .m-tag{font-size:.73rem;padding:.2rem .6rem;border-radius:50px;background:var(--accent-g);border:1px solid rgba(0,229,255,.15);color:var(--accent);font-family:var(--fm)}
+        .m-proofs{display:flex;flex-direction:column;gap:.5rem;margin-top:.6rem}
+        .m-proof{display:inline-flex;align-items:center;gap:.5rem;padding:.55rem 1rem;background:var(--card);border:1px solid var(--border);border-radius:var(--rs);color:var(--t1);text-decoration:none;font-size:.83rem;transition:var(--tr)}
+        .m-proof:hover{border-color:var(--accent);background:var(--accent-g)}
+        .m-proof .p-type{font-family:var(--fm);font-size:.68rem;color:var(--t3);margin-left:auto}
+        .m-comps{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem}
+        .m-comp{font-size:.7rem;padding:.2rem .55rem;border-radius:4px;background:rgba(124,77,255,.1);border:1px solid rgba(124,77,255,.15);color:var(--purple);font-family:var(--fm)}
+
+        /* EXPERIENCE */
+        .timeline{position:relative;padding-left:2rem}
+        .timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:var(--border)}
+        .tl-item{position:relative;margin-bottom:2rem}
+        .tl-dot{position:absolute;left:-2rem;top:4px;width:18px;height:18px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+        .tl-item:first-child .tl-dot{background:var(--accent)}
+        .tl-date{font-family:var(--fm);font-size:.75rem;color:var(--accent);margin-bottom:.3rem}
+        .tl-item h4{font-size:1rem;font-weight:600;margin-bottom:.2rem}
+        .tl-place{font-size:.85rem;color:var(--t3);margin-bottom:.4rem}
+        .tl-item p{font-size:.85rem;color:var(--t2)}
+
+        /* CONTACT */
+        .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+        .contact-info h3{font-size:1.3rem;font-weight:700;margin-bottom:.8rem}
+        .contact-info p{color:var(--t2);font-size:.95rem;margin-bottom:1.5rem}
+        .c-links{display:flex;flex-direction:column;gap:.7rem}
+        .c-link{display:flex;align-items:center;gap:1rem;padding:1rem 1.3rem;background:var(--card);border:1px solid var(--border);border-radius:var(--r);transition:var(--tr)}
+        .c-link:hover{border-color:var(--accent);transform:translateX(4px)}
+        .c-link-icon{width:40px;height:40px;border-radius:var(--rs);background:var(--accent-g);display:flex;align-items:center;justify-content:center;font-size:1.2rem}
+        .c-link .lbl{font-size:.75rem;color:var(--t3)}.c-link .val{font-size:.92rem;font-weight:500}
+        .c-form{display:flex;flex-direction:column;gap:.8rem}
+        .c-form label{font-size:.82rem;font-weight:500;color:var(--t2)}
+        .c-form input,.c-form textarea{background:var(--card);border:1px solid var(--border);border-radius:var(--rs);padding:.8rem 1rem;color:var(--t1);font-family:var(--ff);font-size:.9rem;transition:var(--tr);resize:vertical}
+        .c-form input:focus,.c-form textarea:focus{outline:0;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-g)}
+        .c-form textarea{min-height:110px}
+
+        /* FOOTER */
+        .footer{padding:2rem;border-top:1px solid var(--border);text-align:center;font-size:.82rem;color:var(--t3)}
+        .footer a{color:var(--accent)}
+
+        /* BACK TO TOP */
+        .btt{position:fixed;bottom:2rem;right:2rem;width:44px;height:44px;border-radius:50%;background:var(--accent);color:var(--bg);border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.2rem;z-index:999;opacity:0;transform:translateY(20px);transition:var(--tr);box-shadow:0 4px 16px rgba(0,229,255,.3)}
+        .btt.visible{opacity:1;transform:translateY(0)}.btt:hover{transform:translateY(-2px)}
+
+        /* REVEAL */
+        .reveal{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
+        .reveal.visible{opacity:1;transform:translateY(0)}
+        .reveal-d1{transition-delay:.1s}.reveal-d2{transition-delay:.2s}.reveal-d3{transition-delay:.3s}
+
+        /* BG CLASSES */
+        .vn{background:linear-gradient(135deg,#0d1b2a,#1b2838)}.vs{background:linear-gradient(135deg,#1a0a2e,#2d1b4e)}
+        .vw{background:linear-gradient(135deg,#0a2416,#1b3a2c)}.vi{background:linear-gradient(135deg,#2a1a0d,#3d2b1a)}
+        .vd{background:linear-gradient(135deg,#1a1a2e,#2b2b4e)}.vy{background:linear-gradient(135deg,#0d2a2a,#1b3838)}
+
+        /* RESPONSIVE */
+        @media(max-width:900px){
+            .hero-inner{grid-template-columns:1fr;text-align:center}
+            .hero-badge{margin:0 auto 1.5rem}.hero-desc{margin:0 auto 2rem}
+            .hero-cta{justify-content:center}.hero-photo{order:-1;margin-bottom:1rem}
+            .hero-frame{width:200px;height:260px}.hero-stats{justify-content:center}
+            .about-grid,.contact-grid{grid-template-columns:1fr}
+            .skills-grid,.proj-grid{grid-template-columns:1fr}
+        }
+        @media(max-width:640px){
+            .nav-links{display:none;position:fixed;top:70px;left:0;right:0;background:rgba(10,14,23,.98);backdrop-filter:blur(20px);flex-direction:column;padding:1rem;border-bottom:1px solid var(--border)}
+            .nav-links.open{display:flex}.nav-tog{display:block}
+            section{padding:3rem 1rem}
+            .modal{margin:1rem;max-height:90vh;border-radius:12px}
+            .soft-skills-row{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="navbar">
+    <a href="#hero" class="nav-logo">&lt;Adam<span>Ghazel</span>/&gt;</a>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#hero" class="active">Accueil</a></li>
+        <li><a href="#about">À propos</a></li>
+        <li><a href="#skills">Compétences</a></li>
+        <li><a href="#projects">Projets</a></li>
+        <li><a href="#experience">Parcours</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-tog" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-inner">
+        <div>
+            <div class="hero-badge"><span class="dot"></span>En recherche d'alternance BUT 3 — Septembre 2026</div>
+            <h1 class="hero-name"><span class="gradient">Adam Ghazel</span></h1>
+            <p class="hero-role">Étudiant en 2<sup>ème</sup> année de BUT Réseaux & Télécommunications — IUT Nice Côte d'Azur</p>
+            <p class="hero-desc">
+                Mon objectif : devenir un <strong>spécialiste en cybersécurité et infrastructure réseau</strong>. 
+                Actuellement en stage chez <strong>Orange</strong> à Sophia Antipolis, je suis à la recherche 
+                d'une <strong>alternance pour le BUT 3</strong> (rythme 1 semaine école / 1 semaine entreprise) 
+                à partir de septembre 2026.
+            </p>
+            <div class="hero-cta">
+                <a href="#projects" class="btn btn-p">&#9654; Mes projets</a>
+                <a href="#contact" class="btn btn-o">&#9993; Me contacter</a>
+            </div>
+            <div class="hero-stats">
+                <div class="hero-stat"><div class="num">12+</div><div class="lbl">Projets</div></div>
+                <div class="hero-stat"><div class="num">6</div><div class="lbl">Domaines</div></div>
+                <div class="hero-stat"><div class="num">2</div><div class="lbl">Stages industrie</div></div>
+            </div>
+        </div>
+        <div class="hero-photo">
+            <div class="hero-frame">
+                <img src="profil.png" alt="Adam Ghazel" loading="eager">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+    <div class="container">
+        <div class="sec-label reveal">À propos</div>
+        <h2 class="sec-title reveal">Qui suis-je ?</h2>
+        <div class="about-grid">
+            <div class="about-text reveal">
+                <p>
+                    Étudiant en <strong>BUT R&T à l'IUT de Nice</strong>, je me passionne pour la 
+                    cybersécurité et les infrastructures réseau. Après un stage chez <strong>Thales Alenia Space</strong>, 
+                    je suis actuellement en stage chez <strong>Orange à Sophia Antipolis</strong>. 
+                    Mon expérience d'<strong>arbitrage en MMA League</strong> m'a forgé discipline et réactivité.
+                </p>
+                <p>
+                    Je recherche une <strong>alternance pour le BUT 3</strong> (1 semaine école / 1 semaine entreprise, 
+                    à partir de septembre 2026) pour approfondir mes compétences en <strong>cybersécurité</strong> 
+                    et <strong>administration réseau</strong> en milieu professionnel.
+                </p>
+            </div>
+            <div class="about-cards reveal reveal-d2">
+                <div class="about-card">
+                    <h4>&#127891; Formation</h4>
+                    <p>BUT Réseaux & Télécommunications — IUT Nice Côte d'Azur (2024–2027)</p>
+                </div>
+                <div class="about-card">
+                    <h4>&#128640; Stages</h4>
+                    <p>Orange (Sophia Antipolis, avril 2026) • Thales Alenia Space (Cannes, 2025)</p>
+                </div>
+                <div class="about-card">
+                    <h4>&#127942; Centres d'intérêt</h4>
+                    <p>Sports de combat & arbitrage MMA • CTF & challenges techniques • Veille cybersécurité</p>
+                </div>
+                <div class="about-card">
+                    <h4>&#127919; Objectif</h4>
+                    <p>Alternance BUT 3 dès septembre 2026 — cybersécurité ou administration réseau/systèmes</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Passions -->
+        <div style="margin-top:3rem" class="reveal">
+            <h3 style="font-size:1.15rem;margin-bottom:1rem">&#128293; Ce qui me passionne</h3>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.2rem">
+                <div class="about-card" style="border-left:3px solid var(--accent)">
+                    <h4>&#129354; Sports de combat & Arbitrage MMA</h4>
+                    <p>L'arbitrage en MMA League m'a appris à prendre des décisions en une fraction de seconde, sous la pression d'un public. Cette rigueur et cette gestion du stress, je les transpose directement dans mon travail technique — un incident réseau en production, c'est un peu le même réflexe.</p>
+                </div>
+                <div class="about-card" style="border-left:3px solid var(--purple)">
+                    <h4>&#128187; CTF & Challenges cybersécurité</h4>
+                    <p>Les Capture The Flag sont ma façon préférée d'apprendre. Résoudre un challenge de stéganographie à 2h du matin ou exploiter une faille web dans un CTF, c'est ce qui nourrit ma curiosité et me pousse à toujours aller plus loin en sécurité offensive.</p>
+                </div>
+                <div class="about-card" style="border-left:3px solid var(--green)">
+                    <h4>&#128240; Veille technologique</h4>
+                    <p>Chaque matin, je consulte les dernières CVE, les articles de blogs de sécurité et les nouveautés du monde réseau. Rester à jour dans un domaine qui évolue aussi vite, c'est à la fois un défi et un plaisir quotidien.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SKILLS (with soft skills & languages moved here) -->
+<section id="skills" style="background:var(--bg2)">
+    <div class="container">
+        <div class="sec-label reveal">Compétences</div>
+        <h2 class="sec-title reveal">Stack technique & humaine</h2>
+        <p class="sec-sub reveal">Au fil de mes deux années de BUT R&T et de mes stages chez Thales et Orange, j'ai construit un socle technique solide allant des fondamentaux réseau à la cybersécurité offensive. Cliquez sur chaque carte pour déplier les technologies maîtrisées.</p>
+        <div class="skills-grid" id="skillsGrid"></div>
+
+        <!-- Soft Skills -->
+        <h3 class="reveal" style="margin-top:3rem;font-size:1.1rem;margin-bottom:.5rem">Compétences humaines</h3>
+        <div class="soft-skills-row reveal">
+            <div class="soft-tag"><span class="emoji">&#127919;</span>Leadership</div>
+            <div class="soft-tag"><span class="emoji">&#128172;</span>Communication</div>
+            <div class="soft-tag"><span class="emoji">&#128736;&#65039;</span>Rigueur</div>
+            <div class="soft-tag"><span class="emoji">&#9889;</span>Adaptabilité</div>
+            <div class="soft-tag"><span class="emoji">&#129309;</span>Travail d'équipe</div>
+            <div class="soft-tag"><span class="emoji">&#128170;</span>Gestion du stress</div>
+            <div class="soft-tag"><span class="emoji">&#128640;</span>Autonomie</div>
+        </div>
+
+        <!-- Languages -->
+        <h3 class="reveal" style="margin-top:2rem;font-size:1.1rem;margin-bottom:.5rem">Langues</h3>
+        <div class="langs-row reveal">
+            <div class="lang-tag">&#127467;&#127479; Français <span class="lang-level">Natif</span></div>
+            <div class="lang-tag">&#127468;&#127463; Anglais <span class="lang-level">B2 technique</span></div>
+            <div class="lang-tag">&#127466;&#127468; Arabe <span class="lang-level">Notions</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+    <div class="container">
+        <div class="sec-label reveal">Projets</div>
+        <h2 class="sec-title reveal">Mes réalisations</h2>
+        <p class="sec-sub reveal">12 projets classés par domaine. Chaque projet est cliquable — retrouvez les actions menées, compétences acquises et les preuves téléchargeables.</p>
+        <div class="proj-filters reveal">
+            <button class="filt-btn active" data-filter="all">Tous (12)</button>
+            <button class="filt-btn" data-filter="securite">Sécurité</button>
+            <button class="filt-btn" data-filter="reseau">Réseau</button>
+            <button class="filt-btn" data-filter="systeme">Systèmes</button>
+            <button class="filt-btn" data-filter="web">Web & Dev</button>
+            <button class="filt-btn" data-filter="iot">IoT & Télécom</button>
+        </div>
+        <div class="proj-grid" id="projGrid"></div>
+    </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" style="background:var(--bg2)">
+    <div class="container">
+        <div class="sec-label reveal">Parcours</div>
+        <h2 class="sec-title reveal">Expériences & Formation</h2>
+        <div class="timeline reveal">
+            <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-date">Avril 2026 — Stage en cours</div>
+                <h4>Stagiaire — Orange</h4>
+                <div class="tl-place">Orange — Sophia Antipolis</div>
+                <p>Stage en cours au sein d'Orange à Sophia Antipolis. Immersion dans un environnement télécom de premier plan.</p>
+            </div>
+            <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-date">2024 – 2027</div>
+                <h4>BUT Réseaux & Télécommunications</h4>
+                <div class="tl-place">IUT Nice Côte d'Azur — Sophia Antipolis</div>
+                <p>Spécialisation cybersécurité. Projets SAÉ variés : infrastructure, sécurité réseau, pentesting, développement web, IoT. TPs sur Cisco, GNS3, Linux et Windows Server.</p>
+            </div>
+            <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-date">2025 — Stage</div>
+                <h4>Développeur — Solution d'archivage avionique</h4>
+                <div class="tl-place">Thales Alenia Space — Cannes</div>
+                <p>Développement d'une application web d'archivage photographique pour bancs de tests. Environnement industriel aérospatial à haute exigence qualité.</p>
+            </div>
+            <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-date">2023 – 2024</div>
+                <h4>Baccalauréat</h4>
+                <div class="tl-place">Nice</div>
+                <p>Obtention du baccalauréat avec mention. Premiers pas en informatique et réseaux.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+    <div class="container">
+        <div class="sec-label reveal">Contact</div>
+        <h2 class="sec-title reveal">Restons en contact</h2>
+        <p class="sec-sub reveal">En recherche d'alternance pour le BUT 3 (rythme 1 sem. / 1 sem.) à partir de septembre 2026.</p>
+        <div class="contact-grid">
+            <div class="contact-info reveal">
+                <h3>Envie de collaborer ?</h3>
+                <p>Contactez-moi pour discuter d'opportunités ou simplement échanger sur la cybersécurité et les réseaux.</p>
+                <div class="c-links">
+                    <a href="https://fr.linkedin.com/in/adam-ghazel-00749b338" target="_blank" class="c-link">
+                        <div class="c-link-icon">&#128101;</div>
+                        <div><div class="lbl">LinkedIn</div><div class="val">Adam Ghazel</div></div>
+                    </a>
+                    <a href="https://github.com/adamg216" target="_blank" class="c-link">
+                        <div class="c-link-icon">&#128187;</div>
+                        <div><div class="lbl">GitHub</div><div class="val">adamg216</div></div>
+                    </a>
+                    <a href="mailto:adam.ghazel@etu.univ-cotedazur.fr" class="c-link">
+                        <div class="c-link-icon">&#9993;</div>
+                        <div><div class="lbl">Email</div><div class="val">adam.ghazel@etu.univ-cotedazur.fr</div></div>
+                    </a>
+                </div>
+            </div>
+            <form class="c-form reveal reveal-d2" onsubmit="handleSubmit(event)">
+                <div><label>Nom</label><input type="text" placeholder="Votre nom" required></div>
+                <div><label>Email</label><input type="email" placeholder="votre@email.com" required></div>
+                <div><label>Message</label><textarea placeholder="Votre message..." required></textarea></div>
+                <button type="submit" class="btn btn-p" style="width:100%;justify-content:center">Envoyer &#10148;</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">&copy; 2025 <a href="#hero">Adam Ghazel</a> — Portfolio BUT R&T, IUT Nice Côte d'Azur</footer>
+<button class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+<!-- MODAL -->
+<div class="modal-ov" id="modalOv">
+    <div class="modal" id="modal">
+        <button class="modal-x" onclick="closeModal()">&#10005;</button>
+        <div class="modal-head"><div class="modal-cat" id="mCat"></div><h2 id="mTitle"></h2><div class="modal-ctx" id="mCtx"></div></div>
+        <div class="modal-bd" id="mBody"></div>
+    </div>
+</div>
+
+<script>
+/* ========== SKILLS DATA ========== */
+const skills=[
+{icon:"&#127760;",name:"Réseaux & Infrastructure",items:[
+{n:"Routage (OSPF, BGP, EIGRP)",l:85},{n:"VLANs & Segmentation",l:90},{n:"Haute disponibilité (HSRP/VRRP)",l:75},{n:"Services (DHCP, DNS, NAT)",l:90}],
+details:["OSPF multi-area","BGP peering","EIGRP","Trunk/Access","VTP","PVLAN","HSRP/VRRP","EtherChannel","RSTP","IPv4/IPv6","VLSM","QoS"]},
+{icon:"&#128274;",name:"Cybersécurité",items:[
+{n:"Firewall & Filtrage (ASA)",l:80},{n:"Pentesting & Audit",l:75},{n:"Architecture sécurisée",l:80},{n:"Sécurité applicative",l:70}],
+details:["Cisco ASA","ACL/NAT","DMZ","Metasploit","Nmap","Wireshark","Defense-in-depth","IPsec VPN","SSH hardening","JWT/OAuth","CSRF/XSS","bcrypt"]},
+{icon:"&#128187;",name:"Systèmes & Administration",items:[
+{n:"Linux (Debian/Ubuntu)",l:85},{n:"Windows Server (AD, GPO)",l:80},{n:"PowerShell / Bash",l:75},{n:"Virtualisation",l:80}],
+details:["Debian","Active Directory","DNS/DHCP","GPO","PowerShell","Bash","VMware","VirtualBox","Proxmox","strongSwan","GRE tunnels","iptables"]},
+{icon:"&#128296;",name:"Développement",items:[
+{n:"HTML/CSS/JavaScript",l:85},{n:"Node.js / Express",l:75},{n:"Python",l:70},{n:"Bases de données",l:75}],
+details:["API REST","Express.js","MongoDB","MariaDB","SQLite","Firebase","Flask","DOM/Fetch","ES6+"]},
+{icon:"&#128230;",name:"DevOps & Outils",items:[
+{n:"Docker",l:80},{n:"Git / GitHub",l:85},{n:"CI/CD (GitHub Actions)",l:65},{n:"Cloud (Firebase, AWS)",l:60}],
+details:["Dockerfile","docker-compose","Volumes","Git branching","Pull requests","GitHub Actions","Firebase Hosting","GitHub Pages","Packet Tracer"]},
+{icon:"&#128225;",name:"IoT & Télécommunications",items:[
+{n:"LoRa / LoRaWAN",l:70},{n:"MQTT / CoAP",l:65},{n:"Traitement du signal",l:60},{n:"Antennes & Propagation",l:55}],
+details:["LoRaWAN","MQTT pub/sub","CoAP","Oscilloscope","Câbles coaxiaux","Octave","Friis","Link budget","GNS3"]}
+];
+
+function renderSkills(){
+const g=document.getElementById('skillsGrid');
+skills.forEach((s,i)=>{
+const c=document.createElement('div');
+c.className=`sk-card reveal${i%3?` reveal-d${i%3}`:''}`;
+c.onclick=()=>c.classList.toggle('expanded');
+c.innerHTML=`<div class="sk-head"><div class="sk-icon">${s.icon}</div><h3>${s.name}</h3></div>
+<div class="sk-items">${s.items.map(it=>`<div><div class="sk-item-h"><span class="sk-item-n">${it.n}</span><span class="sk-item-l">${it.l}%</span></div><div class="sk-bar"><div class="sk-fill" data-w="${it.l}"></div></div></div>`).join('')}</div>
+<div class="sk-details"><ul class="sk-det-list">${s.details.map(d=>`<li>${d}</li>`).join('')}</ul></div>
+<div class="sk-tog"><span class="sk-tog-arr">&#9660;</span> Détails</div>`;
+g.appendChild(c);
+});
+}
+
+/* ========== PROJECTS DATA ========== */
+const projects=[
+{id:1,title:"Sécurité Couche 2 — Attaques & Contre-mesures",cat:"securite",catL:"Cybersécurité",ctx:"SAÉ / TP02 — 2ème année",icon:"&#128274;",bg:"vs",
+tags:["GNS3","VLAN Hopping","MAC Flooding","Port Security"],
+desc:"Exploitation de vulnérabilités Layer 2 (Switch Spoofing, Double Tagging, MAC Flooding) et déploiement des contre-mesures sur switches Cisco.",
+comment:"Le projet qui m'a le plus marqué — voir en direct comment un simple macof peut transformer un switch en hub m'a convaincu que la sécurité L2 est trop souvent négligée.",
+full:`<h4>&#128203; Description</h4><p>Étude et exploitation des vulnérabilités de la couche 2 dans GNS3 : Switch Spoofing via DTP, VLAN Hopping par Double Tagging 802.1Q, et MAC Flooding avec macof.</p>
+<h4>&#9889; Actions menées</h4><ul><li>Mise en place de la topologie GNS3 (switches, VLANs, machines)</li><li>Exécution des 3 attaques avec captures Wireshark</li><li>Analyse des impacts sur le trafic réseau</li><li>Implémentation des contre-mesures (Port Security, nonegotiate, BPDU Guard)</li><li>Rédaction du rapport et préparation de la soutenance orale</li></ul>
+<h4>&#128736;&#65039; Technologies</h4><div class="m-tags"><span class="m-tag">GNS3</span><span class="m-tag">Cisco IOS</span><span class="m-tag">macof</span><span class="m-tag">Wireshark</span><span class="m-tag">802.1Q</span><span class="m-tag">DTP</span></div>
+<h4>&#128206; Preuves</h4><div class="m-proofs"><a href="proofs/rapport-securite-couche2.pdf" download class="m-proof"><span>&#128196;</span> Rapport de TP complet<span class="p-type">.pdf</span></a><a href="proofs/capture-wireshark-double-tagging.png" download class="m-proof"><span>&#128247;</span> Capture Wireshark — Double Tagging<span class="p-type">.png</span></a><a href="proofs/config-switch-securise.txt" download class="m-proof"><span>&#128221;</span> Config switch sécurisé (après)<span class="p-type">.txt</span></a></div>
+<h4>&#127919; Compétences acquises</h4><div class="m-comps"><span class="m-comp">Sécuriser un réseau L2</span><span class="m-comp">Analyser les protocoles</span><span class="m-comp">Administrer des switches</span></div>`},
+
+{id:2,title:"Pentesting — Exploitation & Pivoting",cat:"securite",catL:"Cybersécurité",ctx:"SAÉ 3.4 — 2ème année",icon:"&#128375;",bg:"vs",
+tags:["Metasploit","SambaCry","Pivoting","Proxychains"],
+desc:"Audit offensif : exploitation CVE-2017-7494, escalade de privilèges, tunneling SSH et pivoting multi-réseau.",
+comment:"Mon premier vrai pentest de bout en bout — le moment où le tunnel SSH a permis d'atteindre le réseau interne, j'ai compris la puissance du pivoting.",
+full:`<h4>&#128203; Description</h4><p>Audit de sécurité offensif complet : reconnaissance Nmap, exploitation SambaCry, post-exploitation, puis pivoting vers un second réseau interne via tunnel SSH dynamique et Proxychains.</p>
+<h4>&#9889; Actions menées</h4><ul><li>Scan de reconnaissance avec Nmap (identification Samba 4.5.9)</li><li>Exploitation via Metasploit (module is_known_pipename)</li><li>Obtention d'un shell root et extraction de hashes</li><li>Mise en place d'un tunnel SSH dynamique</li><li>Configuration Proxychains pour pivoter vers 10.0.0.0/24</li><li>Présentation orale en anglais (B2)</li></ul>
+<h4>&#128736;&#65039; Technologies</h4><div class="m-tags"><span class="m-tag">Kali Linux</span><span class="m-tag">Metasploit</span><span class="m-tag">Nmap</span><span class="m-tag">Proxychains</span><span class="m-tag">SSH Tunneling</span></div>
+<h4>&#128206; Preuves</h4><div class="m-proofs"><a href="proofs/rapport-pentest-sae34.pdf" download class="m-proof"><span>&#128196;</span> Rapport de pentest détaillé<span class="p-type">.pdf</span></a><a href="proofs/capture-metasploit-sambacry.png" download class="m-proof"><span>&#128247;</span> Capture Metasploit — Shell root<span class="p-type">.png</span></a><a href="proofs/capture-pivoting-proxychains.png" download class="m-proof"><span>&#128247;</span> Capture Pivoting via Proxychains<span class="p-type">.png</span></a></div>
+<h4>&#127919; Compétences acquises</h4><div class="m-comps"><span class="m-comp">Auditer la sécurité</span><span class="m-comp">Exploiter une CVE</span><span class="m-comp">Communiquer en anglais</span></div>`},
+
+{id:3,title:"Infrastructure Debian — Routage, GRE & IPsec",cat:"reseau",catL:"Réseau",ctx:"TP — 2ème année",icon:"&#128421;",bg:"vn",
+tags:["Debian","GRE","IPsec","strongSwan"],
+desc:"Déploiement réseau multi-sites sous Debian : routage statique, tunnels GRE et VPN IPsec avec strongSwan.",
+comment:"Ce TP m'a fait comprendre ce qui se passe vraiment 'sous le capot' des VPN d'entreprise — beaucoup plus formateur que de juste cliquer dans une GUI.",
+full:`<h4>&#128203; Description</h4><p>Infrastructure réseau multi-sites sous Debian avec routage IP statique, tunnels GRE point-à-point et VPN IPsec en mode tunnel avec strongSwan (IKEv2).</p>
+<h4>&#9889; Actions menées</h4><ul><li>Configuration du routage statique inter-réseaux</li><li>Création de tunnels GRE entre sites distants</li><li>Déploiement IPsec avec strongSwan</li><li>Vérification avec tcpdump et Wireshark</li><li>Documentation de chaque étape</li></ul>
+<h4>&#128736;&#65039; Technologies</h4><div class="m-tags"><span class="m-tag">Debian 12</span><span class="m-tag">strongSwan</span><span class="m-tag">GRE</span><span class="m-tag">IPsec IKEv2</span><span class="m-tag">tcpdump</span></div>
+<h4>&#128206; Preuves</h4><div class="m-proofs"><a href="proofs/rapport-infra-debian.pdf" download class="m-proof"><span>&#128196;</span> Rapport de TP<span class="p-type">.pdf</span></a><a href="proofs/schema-infra-debian.png" download class="m-proof"><span>&#127912;</span> Schéma réseau de l'infrastructure<span class="p-type">.png</span></a><a href="proofs/config-strongswan-ipsec.conf" download class="m-proof"><span>&#128221;</span> Configuration strongSwan (ipsec.conf)<span class="p-type">.conf</span></a></div>
+<h4>&#127919; Compétences acquises</h4><div class="m-comps"><span class="m-comp">Administrer un réseau Linux</span><span class="m-comp">Sécuriser les communications</span></div>`},
+
+{id:4,title:"Haute Disponibilité Web — HAProxy & DRBD",cat:"web",catL:"Web & Infra",ctx:"SAÉ — 2ème année",icon:"&#127760;",bg:"vw",
+tags:["HAProxy","Keepalived","DRBD","MariaDB","WordPress"],
+desc:"Architecture web HA sur 6 VMs : load balancing, failover Keepalived, réplication DRBD et cluster MariaDB.",
+comment:"Un projet de groupe ambitieux — coordonner 6 VMs qui doivent tomber et se relever ensemble m'a appris la rigueur du travail en équipe.",
+full:`<h4>&#128203; Description</h4><p>Architecture web haute disponibilité sur 6 VMs : HAProxy en frontal, failover Keepalived (VIP), réplication DRBD, cluster MariaDB Master-Slave, WordPress en backend.</p>
+<h4>&#9889; Actions menées</h4><ul><li>Configuration HAProxy avec health checks</li><li>Keepalived avec VIP flottante</li><li>Réplication DRBD pour les données WordPress</li><li>MariaDB Master-Slave</li><li>Tests de failover et mesure des temps de basculement</li></ul>
+<h4>&#128736;&#65039; Technologies</h4><div class="m-tags"><span class="m-tag">HAProxy</span><span class="m-tag">Keepalived</span><span class="m-tag">DRBD</span><span class="m-tag">MariaDB</span><span class="m-tag">WordPress</span></div>
+<h4>&#128206; Preuves</h4><div class="m-proofs"><a href="proofs/rapport-ha-web.pdf" download class="m-proof"><span>&#128196;</span> Rapport de groupe<span class="p-type">.pdf</span></a><a href="proofs/schema-architecture-ha.png" download class="m-proof"><span>&#127912;</span> Schéma architecture 6 VMs<span class="p-type">.png</span></a><a href="proofs/config-haproxy.cfg" download class="m-proof"><span>&#128221;</span> Configuration HAProxy<span class="p-type">.cfg</span></a></div>
+<h4>&#127919; Compétences acquises</h4><div class="m-comps"><span class="m-comp">Architecturer une solution HA</span><span class="m-comp">Travailler en équipe</span></div>`},
+
+{id:5,title:"Windows Server — AD, DNS, DHCP & PowerShell",cat:"systeme",catL:"Systèmes",ctx:"TP — 2ème année",icon:"&#128187;",bg:"vy",
+tags:["Active Directory","PowerShell","DNS","DHCP"],
+desc:"Infrastructure Windows Server avec AD, DNS, DHCP et script PowerShell unifié de gestion utilisateurs (-WhatIf, logging).",
+comment:"Écrire un script PowerShell qui gère des centaines d'utilisateurs en une commande — c'est là que j'ai vu la puissance de l'automatisation.",
+full:`<h4>&#128203; Description</h4><p>Déploiement complet Windows Server : Active Directory, DNS, DHCP intégrés. Script PowerShell avancé pour la gestion automatisée des utilisateurs avec support -WhatIf et logging.</p>
+<h4>&#9889; Actions menées</h4><ul><li>Installation AD DS, création de forêt et OUs</li><li>Configuration DNS et DHCP</li><li>Développement du script PowerShell unifié</li><li>Implémentation -WhatIf et logging</li><li>Tests et documentation</li></ul>
+<h4>&#128736;&#65039; Technologies</h4><div class="m-tags"><span class="m-tag">Windows Server 2022</span><span class="m-tag">Active Directory</span><span class="m-tag">PowerShell</span><span class="m-tag">GPO</span></div>
+<h4>&#128206; Preuves</h4><div class="m-proofs"><a href="proofs/rapport-windows-server.pdf" download class="m-proof"><span>&#128196;</span> Rapport de TP<span class="p-type">.pdf</span></a><a href="proofs/capture-ad-powershell.png" download class="m-proof"><span>&#128247;</span> Capture PowerShell — Gestion AD<span class="p-type">.png</span></a><a href="proofs/script-gestion-ad.ps1" download class="m-proof"><span>&#128187;</span> Script PowerShell complet<span class="p-type">.ps1</span></a></div>
+<h4>&#127919; Compétences acquises</h4><div class="m-comps"><span class="m-comp">Administrer Windows Server</span><span class="m-comp">Automatiser avec PowerShell</span></div>`},
+
+{id:6,title:"Stage Thales — Archivage Avionique",cat:"web",catL:"Stage professionnel",ctx:"Thales Alenia Space — Cannes",icon:"&#128640;",bg:"vd",
+tags:["Node.js","Express","MongoDB","Docker"],
+desc:"Application web d'archivage photographique pour bancs de tests avioniques. Environnement industriel aérospatial.",
+comment:"Ma première expérience pro — travailler chez Thales m'a montré ce qu'exigence qualité veut dire dans l'industrie. Une fierté personnelle.",
+full:`<h4>&#128203; Description</h4><p>Stage de 10 semaines chez Thales Alenia Space. Développement d'une application web d'archivage photographique pour bancs de tests avioniques, avec API REST et conteneurisation Docker.</p>
+<h4>&#9889; Actions menées</h4><ul><li>Analyse des besoins avec les équipes de production</li><li>Développement backend Node.js/Express</li><li>Base MongoDB pour les métadonnées</li><li>Interface frontend de recherche</li><li>Conteneurisation Docker</li><li>Documentation technique complète</li></ul>
+<h4>&#128736;&#65039; Technologies</h4><div class="m-tags"><span class="m-tag">Node.js</span><span class="m-tag">Express</span><span class="m-tag">MongoDB</span><span class="m-tag">Docker</span><span class="m-tag">Git</span></div>
+<h4>&#128206; Preuves</h4><div class="m-proofs"><a href="proofs/attestation-stage-thales.pdf" download class="m-proof"><span>&#127891;</span> Attestation de stage<span class="p-type">.pdf</span></a><a href="proofs/capture-interface-archivage.png" download class="m-proof"><span>&#128247;</span> Capture API REST — archivage photos<span class="p-type">.png</span></a></div>
+<h4>&#127919; Compétences acquises</h4><div class="m-comps"><span class="m-comp">Développer en milieu pro</span><span class="m-comp">Documenter</span><span class="m-comp">Travailler en équipe</span></div>`},
+
+{id:7,title:"Sensibilisation E-réputation — Collégiens",cat:"securite",catL:"Sensibilisation",ctx:"SAÉ — 1ère année",icon:"&#128227;",bg:"vw",
+tags:["E-réputation","RGPD","Pédagogie","Kahoot"],
+desc:"Animation d'ateliers de sensibilisation à l'e-réputation et aux données personnelles auprès de collégiens.",
+comment:"Expliquer la cybersécurité à des collégiens de 12 ans — un vrai exercice de vulgarisation qui m'a appris à adapter mon discours.",
+full:`<h4>&#128203; Description</h4><p>Sensibilisation de collégiens aux enjeux de l'identité numérique, de l'e-réputation et du RGPD. Création de supports pédagogiques et animation d'ateliers interactifs.</p>
+<h4>&#9889; Actions menées</h4><ul><li>Création de supports pédagogiques visuels</li><li>Animation d'ateliers en classe</li><li>Quiz Kahoot sur la sécurité des données</li><li>Démonstration des traces numériques</li></ul>
+<h4>&#128206; Preuves</h4><div class="m-proofs"><a href="proofs/rapport-ereputation.pdf" download class="m-proof"><span>&#128196;</span> Rapport d'intervention<span class="p-type">.pdf</span></a><a href="proofs/capture-presentation-ereputation.png" download class="m-proof"><span>&#128247;</span> Support de présentation (schéma)<span class="p-type">.png</span></a></div>
+<h4>&#127919; Compétences acquises</h4><div class="m-comps"><span class="m-comp">Communiquer</span><span class="m-comp">Sensibiliser aux risques</span><span class="m-comp">Vulgariser</span></div>`},
+
+{id:8,title:"Infrastructure OSPF/BGP Multi-Area",cat:"reseau",catL:"Réseau",ctx:"TP — 2ème année",icon:"&#128423;",bg:"vn",
+tags:["OSPF","BGP","Cisco","Packet Tracer"],
+desc:"Topologie multi-area OSPF avec redistribution BGP et optimisation des métriques sur Cisco Packet Tracer.",
+comment:"Comprendre comment Internet route les paquets à grande échelle — ce TP m'a ouvert les yeux sur la complexité des grands réseaux.",
+full:`<h4>&#128203; Description</h4><p>Conception d'une topologie OSPF multi-area avec peering BGP eBGP, redistribution de routes et optimisation des coûts sur Cisco Packet Tracer.</p>
+<h4>&#9889; Actions menées</h4><ul><li>Conception topologie multi-area</li><li>Configuration ABR/ASBR</li><li>Peering eBGP entre AS</li><li>Redistribution OSPF/BGP</li><li>Tests de convergence</li></ul>
+<h4>&#128736;&#65039; Technologies</h4><div class="m-tags"><span class="m-tag">Cisco IOS</span><span class="m-tag">OSPF</span><span class="m-tag">BGP</span><span class="m-tag">Packet Tracer</span></div>
+<h4>&#128206; Preuves</h4><div class="m-proofs"><a href="proofs/rapport-ospf-bgp.pdf" download class="m-proof"><span>&#128196;</span> Rapport de TP<span class="p-type">.pdf</span></a><a href="proofs/topologie-ospf-bgp.png" download class="m-proof"><span>&#127912;</span> Topologie réseau annotée<span class="p-type">.png</span></a><a href="proofs/config-routeur-ospf-bgp.txt" download class="m-proof"><span>&#128221;</span> Config routeur ABR/ASBR<span class="p-type">.txt</span></a></div>
+<h4>&#127919; Compétences acquises</h4><div class="m-comps"><span class="m-comp">Administrer un réseau</span><span class="m-comp">Connecter des entreprises</span></div>`},
+
+{id:9,title:"Firewall Cisco ASA — Architecture DMZ",cat:"securite",catL:"Cybersécurité",ctx:"TP — 2ème année",icon:"&#128737;",bg:"vs",
+tags:["Cisco ASA","ACL","DMZ","NAT"],
+desc:"Configuration pare-feu ASA avec DMZ, ACL stateful, NAT et politique defense-in-depth.",
+comment:"Configurer un vrai firewall ASA m'a fait réaliser que la sécurité réseau, c'est avant tout une question de politique bien pensée.",
+full:`<h4>&#128203; Description</h4><p>Configuration d'un firewall Cisco ASA en architecture multi-zones (Inside/Outside/DMZ). ACL stateful, NAT statique/PAT, et tests de validation.</p>
+<h4>&#9889; Actions menées</h4><ul><li>Configuration des zones de sécurité</li><li>ACL stateful avec inspection</li><li>NAT statique serveurs DMZ, PAT réseau interne</li><li>Tests de pénétration et validation</li></ul>
+<h4>&#128736;&#65039; Technologies</h4><div class="m-tags"><span class="m-tag">Cisco ASA</span><span class="m-tag">ACL</span><span class="m-tag">NAT/PAT</span><span class="m-tag">DMZ</span><span class="m-tag">GNS3</span></div>
+<h4>&#128206; Preuves</h4><div class="m-proofs"><a href="proofs/rapport-firewall-asa.pdf" download class="m-proof"><span>&#128196;</span> Rapport de configuration<span class="p-type">.pdf</span></a><a href="proofs/schema-dmz-asa.png" download class="m-proof"><span>&#127912;</span> Schéma architecture DMZ<span class="p-type">.png</span></a><a href="proofs/running-config-asa.txt" download class="m-proof"><span>&#128221;</span> Running-config Cisco ASA<span class="p-type">.txt</span></a></div>
+<h4>&#127919; Compétences acquises</h4><div class="m-comps"><span class="m-comp">Sécuriser un réseau</span><span class="m-comp">Configurer un firewall</span></div>`},
+
+{id:10,title:"Déploiement Docker Multi-containers",cat:"web",catL:"DevOps",ctx:"Projet personnel",icon:"&#128230;",bg:"vd",
+tags:["Docker","docker-compose","Nginx","CI/CD"],
+desc:"Conteneurisation multi-services avec Docker Compose : reverse proxy Nginx, API Node.js et pipeline GitHub Actions.",
+comment:"Mon premier projet personnel hors cours — j'ai voulu comprendre Docker par moi-même et ça m'a ouvert les portes du DevOps.",
+full:`<h4>&#128203; Description</h4><p>Conteneurisation d'une application web multi-services avec Docker Compose, reverse proxy Nginx et pipeline CI/CD GitHub Actions.</p>
+<h4>&#9889; Actions menées</h4><ul><li>Dockerfiles multi-stage optimisés</li><li>Orchestration docker-compose</li><li>Reverse proxy Nginx</li><li>Pipeline GitHub Actions</li><li>Gestion des secrets</li></ul>
+<h4>&#128736;&#65039; Technologies</h4><div class="m-tags"><span class="m-tag">Docker</span><span class="m-tag">docker-compose</span><span class="m-tag">Nginx</span><span class="m-tag">GitHub Actions</span></div>
+<h4>&#128206; Preuves</h4><div class="m-proofs"><a href="proofs/rapport-docker.pdf" download class="m-proof"><span>&#128196;</span> Documentation technique<span class="p-type">.pdf</span></a><a href="proofs/capture-docker-compose.png" download class="m-proof"><span>&#128247;</span> Capture Docker — Stack en fonctionnement<span class="p-type">.png</span></a><a href="proofs/docker-compose.yml" download class="m-proof"><span>&#128221;</span> Fichier docker-compose.yml<span class="p-type">.yml</span></a></div>
+<h4>&#127919; Compétences acquises</h4><div class="m-comps"><span class="m-comp">Conteneuriser</span><span class="m-comp">Automatiser le déploiement</span></div>`},
+
+{id:11,title:"IoT — Réseau LoRaWAN & Dashboard MQTT",cat:"iot",catL:"IoT & Télécom",ctx:"SAÉ — 2ème année",icon:"&#128225;",bg:"vi",
+tags:["LoRaWAN","MQTT","Node-RED","Arduino"],
+desc:"Réseau IoT complet : capteurs LoRa, gateway, broker MQTT et dashboard Node-RED temps réel.",
+comment:"Voir mes capteurs envoyer des données sur plusieurs centaines de mètres en LoRa — la magie de l'IoT basse consommation.",
+full:`<h4>&#128203; Description</h4><p>Déploiement d'un réseau IoT LoRaWAN avec capteurs de température/humidité, gateway, broker MQTT et visualisation temps réel via Node-RED.</p>
+<h4>&#9889; Actions menées</h4><ul><li>Configuration des capteurs LoRa</li><li>Mise en place de la gateway</li><li>Broker MQTT pour la collecte</li><li>Dashboard Node-RED</li><li>Analyse de portée du signal</li></ul>
+<h4>&#128736;&#65039; Technologies</h4><div class="m-tags"><span class="m-tag">LoRaWAN</span><span class="m-tag">MQTT</span><span class="m-tag">Node-RED</span><span class="m-tag">Arduino</span></div>
+<h4>&#128206; Preuves</h4><div class="m-proofs"><a href="proofs/rapport-iot-lorawan.pdf" download class="m-proof"><span>&#128196;</span> Rapport de SAÉ<span class="p-type">.pdf</span></a><a href="proofs/schema-iot-lorawan.png" download class="m-proof"><span>&#127912;</span> Architecture IoT LoRaWAN<span class="p-type">.png</span></a><a href="proofs/capture-mqtt-data.png" download class="m-proof"><span>&#128247;</span> Capture MQTT — Données capteurs<span class="p-type">.png</span></a></div>
+<h4>&#127919; Compétences acquises</h4><div class="m-comps"><span class="m-comp">Déployer un réseau IoT</span><span class="m-comp">Programmer des capteurs</span></div>`},
+
+{id:12,title:"Portfolio Web Personnel",cat:"web",catL:"Développement",ctx:"Projet personnel",icon:"&#127912;",bg:"vw",
+tags:["HTML5","CSS3","JavaScript","GitHub Pages"],
+desc:"Ce portfolio responsive : design dark/cyber, filtres interactifs, modales et preuves cliquables.",
+comment:"Construire ce portfolio m'a permis de mettre en pratique mes compétences frontend tout en prenant du recul sur mon parcours.",
+full:`<h4>&#128203; Description</h4><p>Conception et développement de ce portfolio web responsive avec thème dark, animations CSS, filtrage interactif des projets et modales détaillées.</p>
+<h4>&#9889; Actions menées</h4><ul><li>Design responsive mobile-first</li><li>Animations de révélation au scroll</li><li>Filtrage interactif par catégorie</li><li>Modales avec preuves téléchargeables</li><li>Déploiement GitHub Pages</li></ul>
+<h4>&#128736;&#65039; Technologies</h4><div class="m-tags"><span class="m-tag">HTML5</span><span class="m-tag">CSS3</span><span class="m-tag">JavaScript ES6+</span><span class="m-tag">GitHub Pages</span></div>
+<h4>&#128206; Preuves</h4><div class="m-proofs"><a href="https://adamg216.github.io/portfolio/" target="_blank" class="m-proof"><span>&#127760;</span> Site en ligne<span class="p-type">URL</span></a><a href="https://github.com/adamg216/portfolio" target="_blank" class="m-proof"><span>&#128187;</span> Code source GitHub<span class="p-type">GitHub</span></a></div>
+<h4>&#127919; Compétences acquises</h4><div class="m-comps"><span class="m-comp">Développer un site web</span><span class="m-comp">Communiquer</span></div>`}
+];
+
+/* ========== RENDER PROJECTS ========== */
+function renderProjects(f='all'){
+const g=document.getElementById('projGrid');g.innerHTML='';
+projects.forEach((p,i)=>{
+const show=f==='all'||p.cat===f;
+const c=document.createElement('div');
+c.className=`proj-card reveal${show?'':' hidden'}`;
+c.style.transitionDelay=`${(i%3)*.1}s`;
+c.innerHTML=`<div class="proj-vis"><div class="p-bg ${p.bg}"></div><div class="p-icon">${p.icon}</div></div>
+<div class="proj-body"><div class="proj-cat">${p.catL}</div><h3>${p.title}</h3>
+<p class="proj-desc">${p.desc}</p>
+<p class="proj-comment">${p.comment}</p>
+<div class="proj-tags">${p.tags.map(t=>`<span class="proj-tag">${t}</span>`).join('')}</div>
+<div class="proj-foot"><span class="proj-ctx">${p.ctx}</span><button class="proj-btn" onclick="event.stopPropagation();openModal(${p.id})">Voir détails &#10148;</button></div></div>`;
+c.addEventListener('click',()=>openModal(p.id));
+g.appendChild(c);
+});
+obs();
+}
+
+/* ========== FILTERS ========== */
+document.querySelectorAll('.filt-btn').forEach(b=>{
+b.addEventListener('click',()=>{
+document.querySelectorAll('.filt-btn').forEach(x=>x.classList.remove('active'));
+b.classList.add('active');renderProjects(b.dataset.filter);
+});
+});
+
+/* ========== MODAL ========== */
+function openModal(id){
+const p=projects.find(x=>x.id===id);if(!p)return;
+document.getElementById('mCat').textContent=p.catL;
+document.getElementById('mTitle').textContent=p.title;
+document.getElementById('mCtx').textContent=p.ctx;
+document.getElementById('mBody').innerHTML=p.full;
+document.getElementById('modalOv').classList.add('active');
+document.body.style.overflow='hidden';
+}
+function closeModal(){document.getElementById('modalOv').classList.remove('active');document.body.style.overflow=''}
+document.getElementById('modalOv').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+/* ========== NAV ========== */
+const nb=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{
+nb.classList.toggle('scrolled',scrollY>50);
+document.getElementById('btt').classList.toggle('visible',scrollY>400);
+});
+document.getElementById('navToggle').addEventListener('click',()=>document.getElementById('navLinks').classList.toggle('open'));
+document.querySelectorAll('#navLinks a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open')));
+
+const secs=document.querySelectorAll('section[id]');
+window.addEventListener('scroll',()=>{
+let cur='';secs.forEach(s=>{if(scrollY>=s.offsetTop-100)cur=s.id});
+document.querySelectorAll('#navLinks a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));
+});
+
+/* ========== OBSERVER ========== */
+function obs(){
+const o=new IntersectionObserver(entries=>{
+entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');e.target.querySelectorAll('.sk-fill').forEach(b=>{b.style.width=b.dataset.w+'%'})}});
+},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>o.observe(el));
+}
+
+/* ========== FORM ========== */
+function handleSubmit(e){
+e.preventDefault();const b=e.target.querySelector('button[type="submit"]');
+b.textContent='Message envoyé ! ✓';b.style.background='linear-gradient(135deg,#00e676,#00c853)';
+setTimeout(()=>{b.innerHTML='Envoyer &#10148;';b.style.background='';e.target.reset()},3000);
+}
+
+/* ========== INIT ========== */
+renderSkills();renderProjects();obs();
+</script>
+</body>
+</html>

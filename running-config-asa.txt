@@ -1,0 +1,44 @@
+! ============================================
+! Cisco ASA 5506 — Running Configuration
+! TP Firewall - Adam Ghazel - BUT R&T
+! ============================================
+
+hostname ASA-GHAZEL
+!
+interface GigabitEthernet1/1
+ nameif outside
+ security-level 0
+ ip address 203.0.113.1 255.255.255.0
+!
+interface GigabitEthernet1/2
+ nameif inside
+ security-level 100
+ ip address 192.168.1.1 255.255.255.0
+!
+interface GigabitEthernet1/3
+ nameif dmz
+ security-level 50
+ ip address 172.16.1.1 255.255.255.0
+!
+! --- NAT statique serveur DMZ ---
+object network DMZ-WEB
+ host 172.16.1.10
+ nat (dmz,outside) static 203.0.113.10
+
+! --- PAT reseau interne ---
+object network INSIDE-NET
+ subnet 192.168.1.0 255.255.255.0
+ nat (inside,outside) dynamic interface
+
+! --- ACL ---
+access-list OUTSIDE-IN extended permit tcp any host 203.0.113.10 eq 80
+access-list OUTSIDE-IN extended permit tcp any host 203.0.113.10 eq 443
+access-list OUTSIDE-IN extended deny ip any any log
+
+access-group OUTSIDE-IN in interface outside
+!
+! --- Inspection ---
+policy-map global_policy
+ class inspection_default
+  inspect http
+  inspect dns

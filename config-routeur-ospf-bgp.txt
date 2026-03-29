@@ -1,0 +1,29 @@
+! ============================================
+! Configuration Routeur ABR/ASBR — OSPF + BGP
+! TP Routage avance - Adam Ghazel - BUT R&T
+! ============================================
+
+hostname R3-ABR
+!
+router ospf 1
+ router-id 3.3.3.3
+ network 10.0.0.0 0.0.0.255 area 0
+ network 10.1.0.0 0.0.0.255 area 1
+ network 10.2.0.0 0.0.0.255 area 2
+ passive-interface GigabitEthernet0/0
+ auto-cost reference-bandwidth 10000
+!
+router bgp 100
+ bgp router-id 3.3.3.3
+ neighbor 192.168.1.2 remote-as 200
+ !
+ address-family ipv4
+  redistribute ospf 1 route-map OSPF-TO-BGP
+  neighbor 192.168.1.2 activate
+ exit-address-family
+!
+route-map OSPF-TO-BGP permit 10
+ match ip address prefix-list EXPORT-ROUTES
+ set local-preference 200
+!
+ip prefix-list EXPORT-ROUTES seq 10 permit 10.0.0.0/8 le 24
